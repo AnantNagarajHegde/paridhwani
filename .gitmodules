@@ -1,15 +1,9 @@
-[submodule "product-game-experience"]
-	path = product-game-experience
-	url = https://github.com/AnantNagarajHegde/product-game-experience.git
-
-[submodule "language-learning"]
-	path = language-learning
-	url = https://github.com/AnantNagarajHegde/language-learning.git
-
-[submodule "nlp-intelligence"]
-	path = nlp-intelligence
-	url = https://github.com/AnantNagarajHegde/nlp-intelligence.git
-
-[submodule "research-evaluation-integration"]
-	path = research-evaluation-integration
-	url = https://github.com/AnantNagarajHegde/research-evaluation-integration.git
+[submodule "language-engine"]
+	path = language-engine
+	url = https://github.com/AnantNagarajHegde/language-engine.git
+[submodule "game"]
+	path = game
+	url = https://github.com/AnantNagarajHegde/game.git
+[submodule "integration-pipeline"]
+	path = integration-pipeline
+	url = https://github.com/AnantNagarajHegde/integration-pipeline.git

@@ -1,0 +1,49 @@
+name: Update component pointers
+
+on:
+  repository_dispatch:
+    types: [component-updated]
+  workflow_dispatch:
+  schedule:
+    - cron: '23 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-component-pointers
+  cancel-in-progress: false
+
+jobs:
+  update-pointers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out master repository
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Authenticate to private component repositories
+        env:
+          SUBMODULES_READ_TOKEN: ${{ secrets.SUBMODULES_READ_TOKEN }}
+        run: |
+          if [ -z "$SUBMODULES_READ_TOKEN" ]; then
+            echo "::error::Add the SUBMODULES_READ_TOKEN Actions secret to this repository."
+            exit 1
+          fi
+          git config --global url."https://x-access-token:${SUBMODULES_READ_TOKEN}@github.com/AnantNagarajHegde/game.git".insteadOf "https://github.com/AnantNagarajHegde/game.git"
+          git config --global url."https://x-access-token:${SUBMODULES_READ_TOKEN}@github.com/AnantNagarajHegde/language-engine.git".insteadOf "https://github.com/AnantNagarajHegde/language-engine.git"
+          git config --global url."https://x-access-token:${SUBMODULES_READ_TOKEN}@github.com/AnantNagarajHegde/integration-pipeline.git".insteadOf "https://github.com/AnantNagarajHegde/integration-pipeline.git"
+          git submodule update --init --remote --recursive
+
+      - name: Commit changed component pointers
+        run: |
+          git add game language-engine integration-pipeline
+          if git diff --cached --quiet; then
+            echo "All component pointers are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update component pointers"
+          git push origin HEAD:main

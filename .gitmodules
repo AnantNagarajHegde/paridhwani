@@ -1,9 +1,12 @@
 [submodule "language-engine"]
 	path = language-engine
 	url = https://github.com/AnantNagarajHegde/language-engine.git
+	branch = main
 [submodule "game"]
 	path = game
 	url = https://github.com/AnantNagarajHegde/game.git
+	branch = main
 [submodule "integration-pipeline"]
 	path = integration-pipeline
 	url = https://github.com/AnantNagarajHegde/integration-pipeline.git
+	branch = main

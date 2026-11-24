@@ -5,7 +5,7 @@
 [submodule "game"]
 	path = game
 	url = https://github.com/AnantNagarajHegde/game.git
-	branch = main
+	branch = codex/village-progression
 [submodule "integration-pipeline"]
 	path = integration-pipeline
 	url = https://github.com/AnantNagarajHegde/integration-pipeline.git
